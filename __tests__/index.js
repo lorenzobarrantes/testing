@@ -33,21 +33,21 @@ describe('Inicio de sesión', () => {
     await page.click('.z-button');
   
     // Verificar que el usuario ha iniciado sesión exitosamente
+
+    const title = await page.title();
+    if ( expect(title).toMatch('HOME')){
+      console.log("Inicio de sesion OK")
+    }else{console.error("No se pudo iniciar sesion")}
   });
 
 
   test('Operaciones', async () => {
-    // Ir a la página de inicio de sesión
-    
-    page.waitForNavigation(); // Esperar a que la página cargue completamente
-    await page.waitForSelector('Operaciones');
-    await page.click('Operaciones');
-    await page.waitForSelector('Arribos y p');
-    await page.click('arribosyp');
-    await page.waitForSelector('TomarArribos');
-    await page.click('tomararribos');
-    await page.waitForSelector('arriboNoPlanificado');
-    await page.click('arriboNo');
+    const configuracion = await page.evaluateHandle((text, className) => {
+      const text = text;
+      const className = className;
+    })
+
+
 
   });
   });
