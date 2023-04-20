@@ -33,21 +33,25 @@ describe('Inicio de sesión', () => {
     await page.click('.z-button');
   
     // Verificar que el usuario ha iniciado sesión exitosamente
-
+    await page.waitForNavigation();
     const title = await page.title();
-    if ( expect(title).toMatch('HOME')){
+    if ( expect(title).toMatch('WMS > Almacenes')){
       console.log("Inicio de sesion OK")
-    }else{console.error("No se pudo iniciar sesion")}
+    }else{console.error("No se pudo iniciar sesion")};
+
   });
 
 
   test('Operaciones', async () => {
-    const configuracion = await page.evaluateHandle((text, className) => {
-      const text = text;
-      const className = className;
-    })
-
-
-
+    await page.waitForFunction(() => document.title.includes('WMS > Almacenes'));
+    await page.goto('http://emorell-dt.dnsalias.com:23060/SODA_PREPROD_CONDE/#/operations/arrives/take');
+    // await page.waitForNavigation(); // Wait for the page to load completely
+    // const button = await page.evaluateHandle(() => {
+    //   const buttonText = 'Arribo no planificado';
+    //   const buttons = [...document.querySelectorAll('button')];
+    //   return buttons.find(b => b.innerText.trim() === buttonText);
+    // });
+    
+    // await button.click(); // Click the button
   });
   });
